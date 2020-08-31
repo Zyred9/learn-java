@@ -96,6 +96,7 @@ public class DeepEntity implements Cloneable, Serializable {
 
     /**
      *  FastJson 序列化和反序列化深克隆
+     *  对象中的对象无法实例化
      *
      * @return
      */
