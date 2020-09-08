@@ -1,5 +1,9 @@
 package com.example.learn.design.patterns.prototype.shallow;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
 /**
@@ -14,6 +18,9 @@ import java.util.List;
  * @author zyred
  * @createTime 2020/8/27 16:33
  **/
+@Getter
+@Setter
+@ToString
 public class Entity implements Cloneable{
 
     private String userName;
@@ -24,39 +31,6 @@ public class Entity implements Cloneable{
 
     private ShallowClone shallowClone;
 
-    public String getUserName() {
-        return userName;
-    }
-
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<String> getPhone() {
-        return phone;
-    }
-
-    public void setPhone(List<String> phone) {
-        this.phone = phone;
-    }
-
-    public ShallowClone getShallowClone() {
-        return shallowClone;
-    }
-
-    public void setShallowClone(ShallowClone shallowClone) {
-        this.shallowClone = shallowClone;
-    }
-
     @Override
     public Entity clone (){
         try {
@@ -65,15 +39,5 @@ public class Entity implements Cloneable{
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Entity{" +
-                "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", phone=" + phone +
-                ", shallowClone=" + shallowClone +
-                '}';
     }
 }

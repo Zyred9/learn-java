@@ -3,6 +3,9 @@ package com.example.learn.design.patterns.prototype.deep;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.example.learn.design.patterns.prototype.shallow.ShallowClone;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.*;
 import java.util.List;
@@ -19,48 +22,19 @@ import java.util.List;
  * @author zyred
  * @createTime 2020/8/27 16:33
  **/
+@Setter
+@Getter
+@ToString
 public class DeepEntity implements Cloneable, Serializable {
 
     private String userName;
 
     private String password;
 
-    private List<String> phone;
+    private List<String> hobbys;
 
-    private ShallowClone shallowClone;
+//    private ShallowClone shallowClone;
 
-    public String getUserName() {
-        return userName;
-    }
-
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<String> getPhone() {
-        return phone;
-    }
-
-    public void setPhone(List<String> phone) {
-        this.phone = phone;
-    }
-
-    public ShallowClone getShallowClone() {
-        return shallowClone;
-    }
-
-    public void setShallowClone(ShallowClone shallowClone) {
-        this.shallowClone = shallowClone;
-    }
 
     @Override
     public DeepEntity clone (){
@@ -113,16 +87,5 @@ public class DeepEntity implements Cloneable, Serializable {
         DeepEntity deepEntity = new DeepEntity();
         BeanUtil.copyProperties(this, deepEntity, true);
         return deepEntity;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Entity{" +
-                "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", phone=" + phone +
-                ", shallowClone=" + shallowClone +
-                '}';
     }
 }
