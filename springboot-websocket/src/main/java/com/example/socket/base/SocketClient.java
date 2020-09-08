@@ -1,4 +1,4 @@
-package com.example.learn.socket.base;
+package com.example.socket.base;
 
 import java.io.IOException;
 import java.io.InputStream;

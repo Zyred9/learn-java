@@ -1,4 +1,4 @@
-package com.example.socket;
+package com.example.socket.mvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

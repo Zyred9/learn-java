@@ -1,4 +1,4 @@
-package com.example.socket;
+package com.example.socket.mvc;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

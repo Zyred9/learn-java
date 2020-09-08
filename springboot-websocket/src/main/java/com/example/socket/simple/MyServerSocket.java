@@ -1,4 +1,4 @@
-package com.example.learn.socket.simple;
+package com.example.socket.simple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
