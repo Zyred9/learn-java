@@ -2,3 +2,7 @@ spring:
   elasticsearch:
     rest:
       uris: http://localhost:9200
+server:
+  port: 8888
+  servlet:
+    context-path: /
