@@ -35,16 +35,17 @@ public class WebSocketController {
      * 指定会话ID发消息
      *
      * @param message 消息内容
-     * @param id      连接会话ID
+     * @param userId  连接会话ID
      * @return
      */
     @GetMapping(value = "/sendOne")
-    public String sendOneMessage(@RequestParam String message, @RequestParam String id) {
-        try {
-            WebSocketServer.SendMessage(message, id);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String sendOneMessage(@RequestParam String message, @RequestParam String userId, @RequestParam String userName) {
+        MessageEntity messageEntity = new MessageEntity()
+                .setMessage(message)
+                .setUserId(userId)
+                .setUserName(userName)
+                .setTime();
+        WebSocketServer.SendMessage(messageEntity);
         return "ok";
     }
 }
