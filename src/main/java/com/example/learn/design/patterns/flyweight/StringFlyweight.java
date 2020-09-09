@@ -23,6 +23,10 @@ public class StringFlyweight {
         System.out.println(s1 == s2);
         // false， 这里  s5 是由s3变量加上s4变量得到的，所以，s5不等于 s1
         System.out.println(s1 == s5);
+
+
+        System.out.println(Integer.valueOf(127) == Integer.valueOf(127));
+        System.out.println(Integer.valueOf(128) == Integer.valueOf(128));
     }
 
 }
