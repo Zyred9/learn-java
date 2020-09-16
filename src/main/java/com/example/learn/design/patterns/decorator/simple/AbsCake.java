@@ -7,7 +7,6 @@ package com.example.learn.design.patterns.decorator.simple;
  *
  * @author zyred
  * @createTime 2020/9/4 11:09
- * @company 中再云图技术有限公司
  **/
 public abstract class AbsCake {
 
