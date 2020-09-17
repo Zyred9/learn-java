@@ -31,9 +31,11 @@ public class CachingExecutor implements Executor {
         Integer cacheKey = createCacheKey(statementId, parameters);
         // 命中缓存
         if (cache.containsKey(cacheKey)) {
+            System.out.println("Hit the cache.");
             return (T) cache.get(cacheKey);
         }
         // 走数据库查询
+        System.out.println("Database query.");
         Object result = delegate.query(statementId, parameters, resultPojo);
         cache.put(cacheKey, result);
         return (T) result;

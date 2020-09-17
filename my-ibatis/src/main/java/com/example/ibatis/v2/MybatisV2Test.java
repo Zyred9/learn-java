@@ -21,8 +21,19 @@ public class MybatisV2Test {
 
         BlogMapper mapper = session.getMapper(BlogMapper.class);
         Blog blog = mapper.selectById(1);
+        Blog blog1 = mapper.selectById(1);
 
-        System.out.println(blog);
+        System.out.println("第一次查询" + blog);
+        System.out.println("第二次查询" + blog1);
+
+
+        SqlSession session1 = factory.build().openSession();
+        BlogMapper mapper1 = session1.getMapper(BlogMapper.class);
+        Blog blog3 = mapper1.selectById(1);
+        Blog blog4 = mapper1.selectById(1);
+
+        System.out.println("第一次查询" + blog3);
+        System.out.println("第二次查询" + blog4);
     }
 
 }
