@@ -27,10 +27,12 @@ public class ResultSetHandler {
         try {
             T instance = (T) pojoClazz.newInstance();
             Field[] pojoFields = instance.getClass().getDeclaredFields();
-            for (Field field : pojoFields) {
-                field.setAccessible(true);
-                Object fieldValue = getResult(resultSet, field);
-                field.set(instance, fieldValue);
+            if (resultSet.next()) {
+                for (Field field : pojoFields) {
+                    field.setAccessible(true);
+                    Object fieldValue = getResult(resultSet, field);
+                    field.set(instance, fieldValue);
+                }
             }
             return instance;
         } catch (InstantiationException | IllegalAccessException | SQLException ex) {

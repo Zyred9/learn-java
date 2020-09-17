@@ -1,5 +1,7 @@
 package com.example.ibatis.v2.executor;
 
+import com.example.ibatis.v2.handler.StatementHandler;
+
 /**
  * <p>
  *
@@ -10,14 +12,10 @@ package com.example.ibatis.v2.executor;
  **/
 public class SimpleExecutor implements Executor{
 
-
-
     @Override
     public <T> T query(String sql, Object[] parameters, Class<?> resultPojo) {
-        
-
-
-        return null;
+        StatementHandler statementHandler = new StatementHandler();
+        return (T)statementHandler.query(sql, parameters, resultPojo);
     }
 
     @Override

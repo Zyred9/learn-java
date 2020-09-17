@@ -21,7 +21,8 @@ public class SqlSessionFactory {
         return this;
     }
 
-
-
+    public SqlSession openSession() {
+        return new DefaultSqlSession(configuration);
+    }
 
 }

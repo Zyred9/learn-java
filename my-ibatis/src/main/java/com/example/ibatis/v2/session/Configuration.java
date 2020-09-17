@@ -50,6 +50,9 @@ public class Configuration {
     /** 插件 **/
     private InterceptorChain interceptorChain = new InterceptorChain();
 
+    public <T> T getMapper(Class<T> clazz, DefaultSqlSession sqlSession) {
+        return MAPPER_REGISTRY.getMapper(clazz, sqlSession);
+    }
 
     @SneakyThrows
     public Configuration() {
@@ -60,7 +63,7 @@ public class Configuration {
             String pojoName = sqlMappings.getString(mapping).split(regex)[1];
 
             // 拿到Mapper接口的全路径名称
-            String className = statementId.substring(0, statementId.lastIndexOf(DOT));
+            String className = mapping.substring(0, mapping.lastIndexOf(DOT));
 
             // 实例化mapper接口 和 mapper方法中返回的结果对象
             Class<?> mapper = Class.forName(className);

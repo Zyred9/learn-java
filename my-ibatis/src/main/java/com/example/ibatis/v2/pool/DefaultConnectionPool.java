@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -35,13 +36,12 @@ public class DefaultConnectionPool {
 
     public synchronized static Connection getConnection() {
         Connection first = pool.getFirst();
-
-        int counter = 0;
-        while (pool.getFirst() == null) {
-            counter++;
-            if (counter == 50000) {
-                throw new ConnectionTimeOutException("Database connection Exception.");
+        try {
+            while (pool.getFirst() == null) {
+                TimeUnit.SECONDS.sleep(3);
             }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
         pool.remove(first);
         return first;

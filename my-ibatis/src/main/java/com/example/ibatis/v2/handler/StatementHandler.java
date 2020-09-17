@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 /**
  * <p>
- *          查询预处理
+ * 查询预处理
  * </p>
  *
  * @author zyred
@@ -18,7 +18,7 @@ public class StatementHandler {
 
     private ResultSetHandler resultSetHandler = new ResultSetHandler();
 
-    public <T> T query (String sql, Object[] parameters, Class<?> resultPojo){
+    public <T> T query(String sql, Object[] parameters, Class<?> resultPojo) {
         Connection connection = null;
         try {
 
@@ -30,8 +30,8 @@ public class StatementHandler {
 
             statement.execute();
 
-            return (T)this.resultSetHandler.handlerResult(resultPojo, statement.getResultSet());
-        }catch (SQLException ex) {
+            return (T) this.resultSetHandler.handlerResult(resultPojo, statement.getResultSet());
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             // 归还连接池
