@@ -38,7 +38,7 @@ public class MyBatisTest {
         PageUtil.setPage(0, 4);
         SqlSession session = this.sqlSessionFactory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
-        List<User> page = mapper.getUserPage("18325011211");
+        List<User> page = mapper.getUserPage("10086");
         System.out.println(page.size());
         page.stream().forEach(System.out::println);
     }

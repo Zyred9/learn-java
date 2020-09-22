@@ -25,19 +25,4 @@ public class Blog implements Serializable{
     
     /** 文章作者ID **/
     private Integer authorId;
-
-    public static void main(String[] args) throws Exception {
-        Blog blog = Blog.class.newInstance();
-
-        for (Field field : Blog.class.getDeclaredFields()) {
-            if (field.getType().equals(String.class)){
-                field.set(blog, "张三");
-            }
-            if (field.getType().equals(Integer.class)){
-                field.set(blog, 1);
-            }
-        }
-
-        System.out.println(blog);
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.ibatis.v1;
 
+import java.io.Serializable;
 import java.lang.reflect.Proxy;
 import java.util.ResourceBundle;
 
@@ -11,7 +12,7 @@ import java.util.ResourceBundle;
  * @author zyred
  * @createTime 2020/9/16 16:13
  **/
-public class Configuration {
+public class Configuration implements Serializable {
 
     public static final ResourceBundle sqlMapping;
 

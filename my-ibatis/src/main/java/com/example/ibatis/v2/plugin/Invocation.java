@@ -6,11 +6,14 @@ import java.lang.reflect.Method;
 /**
  * 包装类，对被代理对象进行包装
  *
- * @Author: qingshan
+ * @author zyred
  */
 public class Invocation {
+    /** 被代理的插件对象 **/
     private Object target;
+    /** 执行拦截的方法 **/
     private Method method;
+    /** 方法参数 **/
     private Object[] args;
 
     public Invocation(Object target, Method method, Object[] args) {

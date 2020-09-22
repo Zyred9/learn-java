@@ -27,9 +27,9 @@
         <plugin interceptor="com.example.mybatis.plugin.intercepter.PageInterceptor">
             <property name="gupao" value="betterme" />
         </plugin>
-        <plugin interceptor="com.example.mybatis.plugin.intercepter.LevelOfTableInterceptor">
+        <!--<plugin interceptor="com.example.mybatis.plugin.intercepter.LevelOfTableInterceptor">
             <property name="gupao" value="betterme" />
-        </plugin>
+        </plugin>-->
         <!--<plugin interceptor="com.gupaoedu.interceptor.MyPageInterceptor">
         </plugin>-->
     </plugins>

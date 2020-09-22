@@ -2,6 +2,7 @@ package com.example.ibatis.v1;
 
 import com.example.ibatis.doman.Blog;
 
+import java.io.Serializable;
 import java.sql.*;
 
 /**
@@ -12,7 +13,7 @@ import java.sql.*;
  * @author zyred
  * @createTime 2020/9/16 16:18
  **/
-public class Executor {
+public class Executor implements Serializable {
 
     public <T> T query(String sql, Object paramater) {
         Connection conn = null;

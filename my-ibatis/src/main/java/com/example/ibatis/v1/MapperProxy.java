@@ -1,5 +1,6 @@
 package com.example.ibatis.v1;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -11,7 +12,7 @@ import java.lang.reflect.Method;
  * @author zyred
  * @createTime 2020/9/16 16:25
  **/
-public class MapperProxy implements InvocationHandler {
+public class MapperProxy implements InvocationHandler, Serializable {
     private final static String DOT = ".";
     SqlSession sqlSession;
 
@@ -23,6 +24,8 @@ public class MapperProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String clazzName = method.getDeclaringClass().getName();
         String methodName = method.getName();
+
+        System.out.println("======invoke()====");
 
         return this.sqlSession.selectOne(clazzName.concat(DOT).concat(methodName), args[0]);
     }

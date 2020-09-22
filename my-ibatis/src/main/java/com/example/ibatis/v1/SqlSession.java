@@ -1,5 +1,7 @@
 package com.example.ibatis.v1;
 
+import java.io.Serializable;
+
 /**
  * <p>
  *      sql会话
@@ -8,7 +10,7 @@ package com.example.ibatis.v1;
  * @author zyred
  * @createTime 2020/9/16 16:17
  **/
-public class SqlSession {
+public class SqlSession implements Serializable {
     Configuration configuration;
     Executor executor;
 
