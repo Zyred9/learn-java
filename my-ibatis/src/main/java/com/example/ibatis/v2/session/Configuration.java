@@ -36,7 +36,7 @@ public class Configuration {
     }
 
     /** 接口方法与SQL关系 **/
-    public final static Map<String, String> mappedStatements = new HashMap<>();
+        public final static Map<String, String> mappedStatements = new HashMap<>();
 
     /** 所有Mapper接口 **/
     private List<Class<?>> mapperList = new ArrayList<>();

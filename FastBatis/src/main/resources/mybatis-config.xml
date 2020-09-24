@@ -2,37 +2,32 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties resource="db.properties"></properties>
+    <properties resource="fastbatis.properties"></properties>
     <settings>
         <!-- 打印查询语句 -->
         <setting name="logImpl" value="STDOUT_LOGGING" />
-
         <!-- 控制全局缓存（二级缓存），默认 true-->
         <setting name="cacheEnabled" value="false"/>
-
         <!-- 延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。默认 false  -->
         <setting name="lazyLoadingEnabled" value="false"/>
-        <!-- 当开启时，任何方法的调用都会加载该对象的所有属性。默认 false，可通过select标签的 fetchType来覆盖-->
-        <setting name="aggressiveLazyLoading" value="false"/>
-        <setting name="localCacheScope" value="SESSION"/>
     </settings>
 
-    <typeAliases>
+    <!--<typeAliases>
         <typeAlias alias="user" type="com.example.mybatis.domain.User" />
         <typeAlias alias="fee" type="com.example.mybatis.domain.Fee"/>
-    </typeAliases>
+    </typeAliases>-->
 
     <!-- 配置插件 -->
-    <plugins>
+    <!--<plugins>
         <plugin interceptor="com.example.mybatis.plugin.intercepter.SqlEnhanceInterceptor">
             <property name="gupao" value="betterme" />
         </plugin>
-        <!--<plugin interceptor="com.example.mybatis.plugin.intercepter.LevelOfTableInterceptor">
+        &lt;!&ndash;<plugin interceptor="com.example.mybatis.plugin.intercepter.LevelOfTableInterceptor">
             <property name="gupao" value="betterme" />
-        </plugin>-->
-        <!--<plugin interceptor="com.gupaoedu.interceptor.MyPageInterceptor">
-        </plugin>-->
-    </plugins>
+        </plugin>&ndash;&gt;
+        &lt;!&ndash;<plugin interceptor="com.gupaoedu.interceptor.MyPageInterceptor">
+        </plugin>&ndash;&gt;
+    </plugins>-->
 
     <environments default="development">
         <environment id="development">
@@ -48,7 +43,7 @@
 
     <mappers>
         <mapper resource="UserMapper1.xml"/>
-        <mapper resource="FeeMapper.xml"/>
+        <!--<mapper resource="FeeMapper.xml"/>-->
     </mappers>
 
 </configuration>
