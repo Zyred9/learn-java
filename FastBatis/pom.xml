@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
     <artifactId>FastBatis</artifactId>
     <version>0.0.1-snapshot</version>
 
@@ -23,8 +24,8 @@
 
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.4.3</version>
+            <artifactId>hutool-core</artifactId>
+            <version>5.4.0</version>
         </dependency>
 
 
