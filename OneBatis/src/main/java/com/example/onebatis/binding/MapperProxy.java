@@ -40,9 +40,26 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
         if (sqlSession.getConfiguration().hasStatement(statementId)) {
             SqlBuilder sqlBuilder = sqlSession.getConfiguration().getMappedStatement(statementId);
             // 执行sql查询
-            return sqlSession.selectList(sqlBuilder, args, object);
+//            return sqlSession.selectList(sqlBuilder, args, object);
+            return cachedInvoker(method).invoke(proxy, method, args, sqlSession);
         }
         // 否则直接执行被代理对象的原方法
         return method.invoke(proxy, args);
+    }
+
+    private MapperMethodInvoker cachedInvoker(Method method) {
+        return new PlainMethodInvoker();
+    }
+
+    interface MapperMethodInvoker {
+        Object invoke(Object proxy, Method method, Object[] args, SqlSession sqlSession) throws Throwable;
+    }
+
+    private static class PlainMethodInvoker implements MapperMethodInvoker {
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args, SqlSession sqlSession) throws Throwable {
+            return null;
+        }
     }
 }
