@@ -47,4 +47,9 @@ public class DefaultSqlSession implements SqlSession {
     public Object selectList(SqlBuilder sqlBuilder, Object[] args, Class object) {
         return this.executor.query(args, sqlBuilder);
     }
+
+    @Override
+    public Object flushStatements() {
+        return null;
+    }
 }

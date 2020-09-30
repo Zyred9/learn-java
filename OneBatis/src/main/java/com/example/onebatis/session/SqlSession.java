@@ -1,7 +1,6 @@
 package com.example.onebatis.session;
 
 import com.example.onebatis.builder.SqlBuilder;
-import com.example.test.mapper.UserMapper;
 
 /**
  * <p>
@@ -38,4 +37,8 @@ public interface SqlSession {
      * @return
      */
     Object selectList(SqlBuilder sqlBuilder, Object[] args, Class object);
+
+
+    Object flushStatements();
+
 }

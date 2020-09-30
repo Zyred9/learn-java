@@ -1,6 +1,7 @@
 package com.example.onebatis.builder;
 
 
+import com.example.onebatis.mapping.SqlCommandType;
 import com.example.onebatis.session.Configuration;
 import lombok.Getter;
 
@@ -25,6 +26,8 @@ public class SqlBuilder {
     private boolean flushCache = false;
 
     private boolean useCache = false;
+
+    private SqlCommandType commandType;
 
     private String sql ;
 
@@ -69,6 +72,11 @@ public class SqlBuilder {
 
     public SqlBuilder setStatementId(String statementId) {
         this.statementId = statementId;
+        return this;
+    }
+
+    public SqlBuilder setCommandType(SqlCommandType commandType) {
+        this.commandType = commandType;
         return this;
     }
 }

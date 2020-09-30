@@ -41,25 +41,33 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
             SqlBuilder sqlBuilder = sqlSession.getConfiguration().getMappedStatement(statementId);
             // 执行sql查询
 //            return sqlSession.selectList(sqlBuilder, args, object);
-            return cachedInvoker(method).invoke(proxy, method, args, sqlSession);
+            return cachedInvoker(method).invoke(proxy, method, args, sqlSession, sqlBuilder);
         }
         // 否则直接执行被代理对象的原方法
         return method.invoke(proxy, args);
     }
 
     private MapperMethodInvoker cachedInvoker(Method method) {
-        return new PlainMethodInvoker();
+        return new PlainMethodInvoker(new MapperMethod(method.getDeclaringClass(), method, sqlSession.getConfiguration(), object));
     }
 
     interface MapperMethodInvoker {
-        Object invoke(Object proxy, Method method, Object[] args, SqlSession sqlSession) throws Throwable;
+        Object invoke(Object proxy, Method method, Object[] args,
+                      SqlSession sqlSession, SqlBuilder sqlBuilder) throws Throwable;
     }
 
     private static class PlainMethodInvoker implements MapperMethodInvoker {
+        private MapperMethod mapperMethod;
+
+        public PlainMethodInvoker(MapperMethod mapperMethod) {
+            super();
+            this.mapperMethod = mapperMethod;
+        }
 
         @Override
-        public Object invoke(Object proxy, Method method, Object[] args, SqlSession sqlSession) throws Throwable {
-            return null;
+        public Object invoke(Object proxy, Method method, Object[] args,
+                             SqlSession sqlSession, SqlBuilder sqlBuilder) {
+            return mapperMethod.execute(sqlSession, args, sqlBuilder);
         }
     }
 }

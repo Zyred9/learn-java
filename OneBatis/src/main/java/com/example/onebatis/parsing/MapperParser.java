@@ -2,6 +2,7 @@ package com.example.onebatis.parsing;
 
 import com.example.onebatis.builder.Resources;
 import com.example.onebatis.builder.SqlBuilder;
+import com.example.onebatis.mapping.SqlCommandType;
 import com.example.onebatis.session.Configuration;
 import com.example.onebatis.util.ParseUtil;
 import org.dom4j.Attribute;
@@ -12,6 +13,7 @@ import org.dom4j.tree.DefaultText;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -75,7 +77,8 @@ public class MapperParser {
                         .setUseCache(useCache)
                         .setSql(getSql(element))
                         .setStatementId(statementId)
-                        .setConfiguration(this.configuration);
+                        .setConfiguration(this.configuration)
+                        .setCommandType(parseCommandType(name));
 
                 this.configuration.addSqlMapping(statementId, sqlBuilder);
             }
@@ -117,5 +120,21 @@ public class MapperParser {
             sb.append(space).append(" ");
         }
         return sb.toString();
+    }
+
+    private SqlCommandType parseCommandType (String name){
+        if (Objects.equals("SELECT", name.toUpperCase())) {
+            return SqlCommandType.SELECT;
+        }
+        if (Objects.equals("UPDATE", name.toUpperCase())) {
+            return SqlCommandType.UPDATE;
+        }
+        if (Objects.equals("DELETE", name.toUpperCase())) {
+            return SqlCommandType.DELETE;
+        }
+        if (Objects.equals("INSERT", name.toUpperCase())) {
+            return SqlCommandType.INSERT;
+        }
+        return SqlCommandType.UNKNOWN;
     }
 }
