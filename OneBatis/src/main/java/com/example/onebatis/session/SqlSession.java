@@ -2,6 +2,9 @@ package com.example.onebatis.session;
 
 import com.example.onebatis.builder.SqlBuilder;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * <p>
  * session 接口
@@ -36,9 +39,21 @@ public interface SqlSession {
      * @param object
      * @return
      */
-    Object selectList(SqlBuilder sqlBuilder, Object[] args, Class object);
+    <T> List<T> selectList(SqlBuilder sqlBuilder, Object[] args, Class object);
 
+    /**
+     * 单挑查询
+     * @param args          sql参数
+     * @param sqlBuilder    sql
+     * @return
+     */
+    <T> T selectOne(SqlBuilder sqlBuilder, Object[] args, Class object);
+
+    int insert(Object[] args, SqlBuilder sqlBuilder);
+
+    int update(Object[] args, SqlBuilder sqlBuilder);
 
     Object flushStatements();
+
 
 }

@@ -11,7 +11,11 @@ import java.util.List;
 
 /**
  * <p>
- *
+ *          默认的查询
+ *          主要方法包括： getMapper() 根据mapper接口获取到动态代理后的mapper
+ *                      selectList() 查询集合
+ *                      selectOne()  查询单挑记录
+ *                      flushStatement()  刷新statement
  * </p>
  *
  * @author zyred
@@ -33,7 +37,7 @@ public class DefaultSqlSession implements SqlSession {
     public <T> T getMapper(Class<?> clazz) {
         MapperRegistry registry = this.configuration.getMapperRegistry();
         if (!registry.hasMapper(clazz)) {
-            throw new RuntimeException(clazz.getSimpleName() + " not found.");
+            throw new RuntimeException("Mapper registry not found, case: " + clazz.getSimpleName());
         }
         return (T) registry.getMapper(clazz, this);
     }
@@ -44,12 +48,36 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public Object selectList(SqlBuilder sqlBuilder, Object[] args, Class object) {
+    public <T> List<T> selectList(SqlBuilder sqlBuilder, Object[] args, Class object) {
         return this.executor.query(args, sqlBuilder);
+    }
+
+    @Override
+    public <T> T selectOne(SqlBuilder sqlBuilder, Object[] args, Class object) {
+        List<T> list = this.selectList(sqlBuilder, args, object);
+        if (list.size() == 1) {
+            return list.get(0);
+        } else if (list.size() > 1) {
+            throw new RuntimeException("Expected one result (or null) to be returned by selectOne(), but found: " + list.size());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int insert(Object[] args, SqlBuilder sqlBuilder) {
+        return this.update(args, sqlBuilder);
+    }
+
+    @Override
+    public int update(Object[] args, SqlBuilder sqlBuilder) {
+        return this.executor.update(args, sqlBuilder);
     }
 
     @Override
     public Object flushStatements() {
         return null;
     }
+
+
 }

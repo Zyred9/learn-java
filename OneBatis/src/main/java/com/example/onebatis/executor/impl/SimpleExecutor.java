@@ -16,18 +16,14 @@ import java.util.List;
  **/
 public class SimpleExecutor extends BaseExecutor {
 
-    private Configuration configuration;
-    private boolean autoCommit;
 
     public SimpleExecutor(Configuration configuration, boolean autoCommit) {
-        this.configuration = configuration;
-        this.autoCommit = autoCommit;
+        super(configuration, autoCommit);
     }
 
     @Override
     public <T> List<T> query(Object[] parameters, SqlBuilder sqlBuilder) {
-        StatementHandler statementHandler = new StatementHandler();
-        return statementHandler.query(parameters, sqlBuilder, this.configuration, autoCommit);
+        return super.query(parameters, sqlBuilder);
     }
 
     @Override
