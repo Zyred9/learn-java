@@ -48,7 +48,7 @@ public class MapperMethod {
                 break;
             }
             case DELETE: {
-                // TODO
+                result = this.rowCountResult(sqlSession.delete(args, sqlBuilder));
                 break;
             }
             case SELECT:

@@ -42,18 +42,41 @@ public interface SqlSession {
     <T> List<T> selectList(SqlBuilder sqlBuilder, Object[] args, Class object);
 
     /**
-     * 单挑查询
+     * 单条查询
      * @param args          sql参数
      * @param sqlBuilder    sql
      * @return
      */
     <T> T selectOne(SqlBuilder sqlBuilder, Object[] args, Class object);
 
+    /**
+     * 插入一条数据
+     * @param args          sql参数
+     * @param sqlBuilder    sql对象
+     * @return
+     */
     int insert(Object[] args, SqlBuilder sqlBuilder);
 
+    /**
+     * 更新方法
+     * @param args          sql参数
+     * @param sqlBuilder    sql对象
+     * @return
+     */
     int update(Object[] args, SqlBuilder sqlBuilder);
 
-    Object flushStatements();
+    /**
+     * 删除方法
+     * @param args          sql参数
+     * @param sqlBuilder    sql对象
+     * @return
+     */
+    int delete(Object[] args, SqlBuilder sqlBuilder);
 
+    /**
+     * 刷新 statement 对象
+     * @return
+     */
+    Object flushStatements();
 
 }

@@ -16,4 +16,5 @@ public interface UserMapper {
 
     List<User> getUserPage(String phone);
 
+    int inertUser(User user);
 }

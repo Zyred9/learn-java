@@ -7,6 +7,7 @@ import com.example.onebatis.session.Configuration;
 import com.example.onebatis.session.SqlSession;
 import com.example.test.mapper.UserMapper;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -75,8 +76,13 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
+    public int delete(Object[] args, SqlBuilder sqlBuilder) {
+        return this.update(args, sqlBuilder);
+    }
+
+    @Override
     public Object flushStatements() {
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
 

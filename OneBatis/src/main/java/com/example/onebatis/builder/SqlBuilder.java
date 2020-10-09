@@ -79,4 +79,5 @@ public class SqlBuilder {
         this.commandType = commandType;
         return this;
     }
+
 }
