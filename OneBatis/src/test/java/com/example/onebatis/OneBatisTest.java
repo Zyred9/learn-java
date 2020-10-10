@@ -60,6 +60,30 @@ public class OneBatisTest {
     }
 
     @Test
+    public void update () {
+        SqlSession sqlSession = build.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        User user = new User();
+        user.setId("5");
+        user.setUserName("哈八");
+        user.setPassword("321654");
+
+        int i = mapper.updateUser(user);
+        System.out.println(i);
+    }
+
+    @Test
+    public void delete () {
+        SqlSession sqlSession = build.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        int i = mapper.deleteUser("6");
+        System.out.println(i);
+    }
+
+
+    @Test
     public void jdbcInsert() throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");

@@ -97,7 +97,7 @@ public class MapperParser {
     private boolean contains(String name) {
         if (name.contains("select")
                 || name.contains("update")
-                || name.contains("deleted")
+                || name.contains("delete")
                 || name.contains("insert")
         ) {
             return false;
