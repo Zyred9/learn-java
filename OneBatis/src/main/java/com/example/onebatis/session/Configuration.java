@@ -57,6 +57,10 @@ public final class Configuration {
         this.mapperRegistry.addMapper(clazz);
     }
 
+    public boolean hasMapper(Class<?> clazz){
+        return this.mapperRegistry.hasMapper(clazz);
+    }
+
     public boolean hasStatement(String statementId){
         return this.sqlMapping.containsKey(statementId);
     }

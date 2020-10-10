@@ -43,8 +43,9 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
 //            return sqlSession.selectList(sqlBuilder, args, object);
             return cachedInvoker(method).invoke(proxy, method, args, sqlSession, sqlBuilder);
         }
-        // 否则直接执行被代理对象的原方法
-        return method.invoke(proxy, args);
+//        return method.invoke(proxy, args);
+        // 找不到 sql 和方法对应关系
+        throw new RuntimeException("SQL and method relation could not be found.");
     }
 
     private MapperMethodInvoker cachedInvoker(Method method) {

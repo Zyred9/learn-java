@@ -12,7 +12,9 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultText;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -23,7 +25,6 @@ import java.util.Objects;
  * @author zyred
  * @createTime 2020/9/24 8:34
  **/
-@SuppressWarnings("unchecked")
 public class MapperParser {
 
     private List<String> resources;
@@ -33,7 +34,6 @@ public class MapperParser {
         this.resources = resources;
         this.configuration = configuration;
     }
-
 
     public void parse() {
         for (String resource : resources) {
@@ -51,8 +51,11 @@ public class MapperParser {
 
             try {
                 Class<?> clazz = Class.forName(namespace);
-                this.configuration.addMapper(clazz);
-            }catch (Exception ex){
+                if (!this.configuration.hasMapper(clazz)) {
+                    this.configuration.addMapper(clazz);
+                }
+
+            } catch (Exception ex) {
                 throw new Exception("parse mapper failure  case: " + namespace, ex);
             }
 
@@ -62,10 +65,13 @@ public class MapperParser {
             for (Element element : sqlElement) {
                 String name = element.getName();
                 // 当前版本只解析 CRUD 标签
-                if (this.contains(name)) { continue; }
+                if (this.contains(name)) {
+                    continue;
+                }
                 String methodId = element.attribute("id").getValue();
-                statementId += methodId;
-                String resultType = element.attribute("resultType").getValue();
+                String id = statementId + methodId;
+                Attribute attribute = element.attribute("resultType");
+                String resultType = attribute == null ? null : attribute.getValue();
                 String parameterType = getAttribute("parameterType", element);
                 boolean flushCache = ParseUtil.revert(getAttribute("flushCache", element));
                 boolean useCache = ParseUtil.revert(getAttribute("useCache", element));
@@ -76,11 +82,11 @@ public class MapperParser {
                         .setFlushCache(flushCache)
                         .setUseCache(useCache)
                         .setSql(getSql(element))
-                        .setStatementId(statementId)
+                        .setStatementId(id)
                         .setConfiguration(this.configuration)
                         .setCommandType(parseCommandType(name));
 
-                this.configuration.addSqlMapping(statementId, sqlBuilder);
+                this.configuration.addSqlMapping(id, sqlBuilder);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -92,7 +98,7 @@ public class MapperParser {
         if (name.contains("select")
                 || name.contains("update")
                 || name.contains("deleted")
-                || name.contains("deleted")
+                || name.contains("insert")
         ) {
             return false;
         }
@@ -108,21 +114,37 @@ public class MapperParser {
         return null;
     }
 
+    /**
+     * 这里拿到sql，不做任何处理
+     * @param element   XML 节点
+     * @return
+     */
     private String getSql(Element element) {
         String sql = ((DefaultText) (element.content().get(0))).getText();
+
+        if (sql != null){
+            return sql.trim().replaceAll("\n", "");
+        }
+
+        // 不执行下面的代码
         String s1 = sql.trim().replaceAll("\n", "");
         String[] split = s1.split(" ");
         StringBuilder sb = new StringBuilder();
-        for (String space : split) {
+
+        for (int i = 0; i < split.length; i++) {
+            String space = split[i];
             if (space.contains("#{")) {
                 space = "?";
+                if (i != split.length - 1){
+                    space += ",";
+                }
             }
             sb.append(space).append(" ");
         }
         return sb.toString();
     }
 
-    private SqlCommandType parseCommandType (String name){
+    private SqlCommandType parseCommandType(String name) {
         if (Objects.equals("SELECT", name.toUpperCase())) {
             return SqlCommandType.SELECT;
         }

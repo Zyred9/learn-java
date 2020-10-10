@@ -10,6 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -27,7 +31,7 @@ public class OneBatisTest {
     private User user;
 
     @Before
-    public void before(){
+    public void before() {
         user = new User();
         user.setUserName("苟七");
         user.setPassword("12345");
@@ -40,7 +44,7 @@ public class OneBatisTest {
 
 
     @Test
-    public void selectList(){
+    public void selectList() {
         SqlSession sqlSession = build.openSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         List<User> page = mapper.getUserPage("10086");
@@ -48,10 +52,33 @@ public class OneBatisTest {
     }
 
     @Test
-    public void insert(){
+    public void insert() {
         SqlSession sqlSession = build.openSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int i = mapper.inertUser(user);
         System.out.println(i);
+    }
+
+    @Test
+    public void jdbcInsert() throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        //获取连接
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onebatis?serverTimezone=GMT%2B8", "root", "root");
+        //sql
+        String sql = "INSERT INTO t_user (user_name, password, address, phone) values (?, ?, ?, ?);";
+        //预编译
+        PreparedStatement ptmt = conn.prepareStatement(sql); //预编译SQL，减少sql执行
+
+        //传参
+        ptmt.setString(1, "haha");
+        ptmt.setString(2, "123456");
+        ptmt.setString(3, "重慶");
+        ptmt.setString(4, "10086");
+
+        //执行
+        ptmt.execute();
+
     }
 }
