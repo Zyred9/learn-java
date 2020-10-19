@@ -1,4 +1,4 @@
-package com.example.netty.server;
+package com.example.netty.simple.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -32,7 +32,6 @@ public class EchoServer {
 
     public void init() throws InterruptedException {
         // 创建自己的处理器
-        EchoServerHandler handler = new EchoServerHandler();
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
@@ -48,7 +47,7 @@ public class EchoServer {
                         @Override
                         protected void initChannel(SocketChannel sc) throws Exception {
                             // EchoServerHandler被标注为@Shareable，所以我们可以总是使用同样的实例
-                            sc.pipeline().addLast(handler);
+                            sc.pipeline().addLast(new EchoServerHandler());
                         }
                     });
             // 异步地绑定服务器；调用 sync()方法阻塞等待直到绑定完成

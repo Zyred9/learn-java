@@ -1,4 +1,4 @@
-package com.example.netty.client;
+package com.example.netty.simple.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -34,7 +34,7 @@ public class EchoClient {
     }
 
     public void start() throws Exception {
-        EchoClientHandler handler = new EchoClientHandler();
+        com.example.netty.simple.client.EchoClientHandler handler = new com.example.netty.simple.client.EchoClientHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
