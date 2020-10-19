@@ -107,7 +107,7 @@ public class AnnotationApplicationContext implements ApplicationContext {
         // 将包装类放入到 IOC中
         this.factoryBeanInstanceCache.put(beanName, beanWrapper);
         // 执行核心的依赖注入操作
-        populateBean(beanName, beanWrapper);
+        populateBean(beanWrapper);
         // 返回实体
         return beanWrapper.getWrapperInstance();
     }
@@ -141,7 +141,7 @@ public class AnnotationApplicationContext implements ApplicationContext {
      *
      * @param beanWrapper 包装器
      */
-    private void populateBean(String beanName, BeanWrapper beanWrapper) {
+    private void populateBean(BeanWrapper beanWrapper) {
         Object instance = beanWrapper.getWrapperInstance();
 
         Class<?> wrapperClazz = beanWrapper.getWrapperClazz();
@@ -193,5 +193,10 @@ public class AnnotationApplicationContext implements ApplicationContext {
     @Override
     public <T> T getBean(Class<T> clazz){
         return (T) this.getBean(clazz.getName());
+    }
+
+    @Override
+    public Set<String> getAllBean() {
+        return this.factoryBeanObjectCache.keySet();
     }
 }

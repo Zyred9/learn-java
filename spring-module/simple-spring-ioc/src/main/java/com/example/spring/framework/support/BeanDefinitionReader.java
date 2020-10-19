@@ -50,7 +50,7 @@ public class BeanDefinitionReader {
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();
                 File classPath = new File(url.getFile());
-                //当成是一个ClassPath文件夹
+                //当前是一个ClassPath文件夹
                 for (File file : classPath.listFiles()) {
                     if(file.isDirectory()){
                         doScanner(scanPackage + "." + file.getName());

@@ -5,6 +5,8 @@ import com.example.spring.framework.context.ApplicationContext;
 import com.example.test.ControllerTest;
 import org.junit.Test;
 
+import java.util.Set;
+
 /**
  * <p>
  *
@@ -18,8 +20,10 @@ public class TestSpring {
     @Test
     public void run () {
         ApplicationContext app = new AnnotationApplicationContext("classpath:application.properties");
-        ControllerTest bean = app.getBean(ControllerTest.class);
-        System.out.println(bean);
+//        ControllerTest bean = app.getBean(ControllerTest.class);
+//        System.out.println(bean);
+        Set<String> allBean = app.getAllBean();
+        allBean.stream().forEach(System.out::println);
     }
 
 }
