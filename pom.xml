@@ -20,6 +20,12 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>spring-module</module>
+        <module>base-module</module>
+        <module>netty-module</module>
+        <module>mybatis-module</module>
+    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->

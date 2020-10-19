@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spirng-boot-mongodb
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.1.106:3306/tecxen?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
