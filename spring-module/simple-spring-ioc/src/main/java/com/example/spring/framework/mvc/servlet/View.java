@@ -36,7 +36,6 @@ public class View {
             while (matcher.find()){
                 String paramName = matcher.group();
                 paramName = paramName.replaceAll("￥\\{|\\}","");
-                System.out.println("每次请求的参数： " + paramName);
                 Object paramValue = model.get(paramName);
                 line = matcher.replaceFirst(makeStringForRegExp(paramValue.toString()));
                 matcher = pattern.matcher(line);

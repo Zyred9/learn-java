@@ -5,6 +5,7 @@ import com.example.spring.framework.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,9 +42,9 @@ public class HandlerAdapter {
         //初始化一下
         Class<?> [] paramTypes = handler.getMethod().getParameterTypes();
         for (int i = 0; i < paramTypes.length; i++) {
-            Class<?> paramterType = paramTypes[i];
-            if(paramterType == HttpServletRequest.class || paramterType == HttpServletResponse.class){
-                paramIndexMapping.put(paramterType.getName(),i);
+            Class<?> parameterType = paramTypes[i];
+            if(parameterType == HttpServletRequest.class || parameterType == HttpServletResponse.class){
+                paramIndexMapping.put(parameterType.getName(),i);
             }
         }
 
@@ -77,7 +78,13 @@ public class HandlerAdapter {
             paramValues[index] = resp;
         }
 
-        Object result = handler.getMethod().invoke(handler.getController(),paramValues);
+        Method method = handler.getMethod();
+
+        if (method == null){
+            return null;
+        }
+
+        Object result = method.invoke(handler.getController(),paramValues);
         if(result == null || result instanceof Void){return null;}
 
         boolean isModelAndView = handler.getMethod().getReturnType() == ModelAndView.class;

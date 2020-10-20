@@ -3,6 +3,8 @@ package com.example.test.service.impl;
 import com.example.spring.framework.annotation.Service;
 import com.example.test.service.UserService;
 
+import java.util.Random;
+
 /**
  * <p>
  *
@@ -16,7 +18,7 @@ import com.example.test.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public String getUserNameById(String userId) {
-        return "1";
+    public String getData() {
+        return new Random().nextInt() + "";
     }
 }

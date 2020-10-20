@@ -5,6 +5,7 @@ import com.example.spring.framework.annotation.Controller;
 import com.example.spring.framework.annotation.RequestMapping;
 import com.example.spring.framework.context.AnnotationApplicationContext;
 import com.example.spring.framework.context.ApplicationContext;
+import com.example.test.ControllerTest;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
@@ -202,6 +203,9 @@ public class DispatcherServlet extends HttpServlet {
         uri = uri.replaceAll("/+", "/")
                 .replaceAll(contextPath, "")
                 .trim();
+        if (Objects.equals("/favicon.ico", uri)) {
+            return new HandlerMapping(Pattern.compile("/favicon.ico"), new ControllerTest(), null);
+        }
 
         for (HandlerMapping mapping : this.handlerMappings) {
             if (!mapping.getPattern().matcher(uri).matches()) {

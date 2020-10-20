@@ -12,4 +12,8 @@ import com.example.spring.framework.annotation.Controller;
  **/
 @Controller
 public class ControllerTest {
+
+    public void get(){
+
+    }
 }
