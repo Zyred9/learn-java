@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +37,8 @@ public class View {
             while (matcher.find()){
                 String paramName = matcher.group();
                 paramName = paramName.replaceAll("￥\\{|\\}","");
-                Object paramValue = model.get(paramName);
+
+                Object paramValue = Objects.isNull(model) ? "undefined" : model.get(paramName);
                 line = matcher.replaceFirst(makeStringForRegExp(paramValue.toString()));
                 matcher = pattern.matcher(line);
             }

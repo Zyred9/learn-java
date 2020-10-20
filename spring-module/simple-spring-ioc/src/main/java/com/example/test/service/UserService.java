@@ -15,6 +15,6 @@ public interface UserService {
      * 根据用户ID获取用户名称
      * @return
      */
-    String getData();
+    String getData() throws Exception;
 
 }

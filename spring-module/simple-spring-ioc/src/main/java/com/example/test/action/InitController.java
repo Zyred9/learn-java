@@ -24,7 +24,7 @@ public class InitController {
     private UserService userService;
 
     @RequestMapping("test")
-    public ModelAndView first(@RequestParam("teacher") String teacher){
+    public ModelAndView first(@RequestParam("teacher") String teacher) throws Exception {
         Map<String,Object> model = new HashMap<>();
         model.put("teacher", teacher);
         model.put("data", this.userService.getData());

@@ -3,6 +3,9 @@ package com.example.spring.framework.context;
 import com.example.spring.framework.annotation.Autowired;
 import com.example.spring.framework.annotation.Controller;
 import com.example.spring.framework.annotation.Service;
+import com.example.spring.framework.aop.JdkDynamicProxy;
+import com.example.spring.framework.aop.config.AopConfig;
+import com.example.spring.framework.aop.support.AdvisedSupport;
 import com.example.spring.framework.beans.BeanWrapper;
 import com.example.spring.framework.beans.config.BeanDefinition;
 import com.example.spring.framework.support.BeanDefinitionReader;
@@ -21,24 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class AnnotationApplicationContext implements ApplicationContext {
 
-    /**
-     * 对Bean的信息进行存储
-     **/
-    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
-
-    /**
-     *
-     **/
     private String[] configLocations;
     private BeanDefinitionReader reader;
-
-    /**
-     * IOC单例容器
-     **/
+    /** 对Bean的信息进行存储 **/
+    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
+    /** IOC单例容器 **/
     private Map<String, Object> factoryBeanObjectCache = new ConcurrentHashMap<>();
-    /**
-     * 二级缓存容器，被初始化后的实例缓存容器
-     **/
+    /** 二级缓存容器，被初始化后的实例缓存容器 **/
     private Map<String, BeanWrapper> factoryBeanInstanceCache = new ConcurrentHashMap<>();
 
 
@@ -124,11 +116,45 @@ public class AnnotationApplicationContext implements ApplicationContext {
         try {
             Class<?> clazz = Class.forName(beanClassName);
             instance = clazz.newInstance();
+
+            /***************AOP****************/
+            // 初始化配置AOP配置文件
+            AdvisedSupport support = instantInitAopConfig();
+            if (Objects.nonNull(support)) {
+
+                support.setTargetClass(clazz)
+                        .setTarget(instance);
+                /**
+                 *  判断规则，要不要生成代理类，如果要就覆盖原生对象
+                 *  如果不要就不做任何处理，返回原生对象
+                 **/
+                if (support.pointCutMath()) {
+                    instance = new JdkDynamicProxy(support).getProxy();
+                }
+            }
+            /***************AOP****************/
+
+
             this.factoryBeanObjectCache.put(beanName, instance);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
         return instance;
+    }
+
+    private AdvisedSupport instantInitAopConfig() {
+        Properties realConfig = this.reader.getConfig();
+        if (Objects.isNull(realConfig.getProperty("pointCut"))) {
+            return null;
+        }
+        AopConfig config = new AopConfig()
+                .setPointCut(realConfig.getProperty("pointCut"))
+                .setAspectAfter(realConfig.getProperty("aspectAfter"))
+                .setAspectAfterThrow(realConfig.getProperty("aspectAfterThrow"))
+                .setAspectAfterThrowingName(realConfig.getProperty("aspectAfterThrowingName"))
+                .setAspectBefore(realConfig.getProperty("aspectBefore"))
+                .setAspectClass(realConfig.getProperty("aspectClass"));
+        return new AdvisedSupport(config);
     }
 
     /**

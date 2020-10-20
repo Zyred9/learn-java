@@ -4,6 +4,7 @@ import com.example.spring.framework.annotation.Service;
 import com.example.test.service.UserService;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public String getData() {
+    public String getData() throws Exception {
         return new Random().nextInt() + "";
     }
 }
