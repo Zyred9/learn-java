@@ -1,6 +1,7 @@
 package com.example.spring.framework.context;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -21,9 +22,18 @@ public interface ApplicationContext {
      */
     <T> T getBean(Class<T> clazz);
 
+    Object getBean(String beanName);
+
     /**
      * 根据类名获取bean
      * @return
      */
     Set<String> getAllBean();
+
+    int getBeanDefinitionCount();
+
+    String[] getBeanDefinitionNames();
+
+    Properties getConfig();
+
 }

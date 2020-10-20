@@ -4,10 +4,10 @@
 		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 		 version="2.4">
-	<display-name>Gupao Web Application</display-name>
+	<display-name>Web Application</display-name>
 	<servlet>
-		<servlet-name>gpmvc</servlet-name>
-		<servlet-class>com.example.spring.framework.mvc.servlet.GPDispatcherServlet</servlet-class>
+		<servlet-name>mvc</servlet-name>
+		<servlet-class>com.example.spring.framework.mvc.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:application.properties</param-value>
@@ -15,7 +15,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>gpmvc</servlet-name>
+		<servlet-name>mvc</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 </web-app>

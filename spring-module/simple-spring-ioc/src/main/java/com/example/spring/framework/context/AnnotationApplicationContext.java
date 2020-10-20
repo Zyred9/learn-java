@@ -8,10 +8,7 @@ import com.example.spring.framework.beans.config.BeanDefinition;
 import com.example.spring.framework.support.BeanDefinitionReader;
 
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -97,7 +94,7 @@ public class AnnotationApplicationContext implements ApplicationContext {
      * @param beanName
      * @return
      */
-    private Object getBean(String beanName) {
+    public Object getBean(String beanName) {
         // 获取到当前BeanName 对应的Definition对象
         BeanDefinition definition = this.beanDefinitionMap.get(beanName);
         // 反射获取实例
@@ -198,5 +195,18 @@ public class AnnotationApplicationContext implements ApplicationContext {
     @Override
     public Set<String> getAllBean() {
         return this.factoryBeanObjectCache.keySet();
+    }
+
+    public int getBeanDefinitionCount() {
+        return this.beanDefinitionMap.size();
+    }
+
+    public String[] getBeanDefinitionNames() {
+        return this.beanDefinitionMap.keySet().toArray(new String[this.beanDefinitionMap.size()]);
+    }
+
+    @Override
+    public Properties getConfig() {
+        return this.reader.getConfig();
     }
 }

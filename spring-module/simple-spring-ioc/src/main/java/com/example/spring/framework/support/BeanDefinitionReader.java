@@ -65,7 +65,7 @@ public class BeanDefinitionReader {
     }
 
 
-    private Properties getConfig() {
+    public Properties getConfig() {
         return this.config;
     }
 
