@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Map;
  * @author zyred
  * @since v 0.1
  **/
-public class JdkDynamicProxy implements AopProxy, InvocationHandler {
+public class JdkDynamicProxy implements InvocationHandler {
 
     private AdvisedSupport support;
 
@@ -24,14 +25,14 @@ public class JdkDynamicProxy implements AopProxy, InvocationHandler {
         this.support = support;
     }
 
-    @Override
+//    @Override
     public Object getProxy() {
-        return null;
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(), this.support.getTargetClass().getInterfaces(),this);
     }
 
-    @Override
+//    @Override
     public Object getProxy(ClassLoader classLoader) {
-        return null;
+        return Proxy.newProxyInstance(classLoader, this.support.getTargetClass().getInterfaces(),this);
     }
 
     @Override

@@ -20,6 +20,9 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>web-module/single-login</module>
+    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
@@ -104,5 +107,6 @@
         </dependency>-->
 
     </dependencies>
+
 
 </project>

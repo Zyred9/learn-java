@@ -30,10 +30,10 @@ public class EchoClient {
 
     public static void main(String[] args) throws Exception {
         EchoClient client = new EchoClient("localhost", 9998);
-        client.start();
+        //client.start();
     }
 
-    public void start() throws Exception {
+    /*public void start() throws Exception {
         com.example.netty.simple.client.EchoClientHandler handler = new com.example.netty.simple.client.EchoClientHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -54,5 +54,5 @@ public class EchoClient {
         } finally {
             group.shutdownGracefully().sync();
         }
-    }
+    }*/
 }

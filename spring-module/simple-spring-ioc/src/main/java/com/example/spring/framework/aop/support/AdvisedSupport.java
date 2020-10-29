@@ -87,7 +87,7 @@ public class AdvisedSupport {
                 this.generatorAdvice(advices, aspectClazz, aspectMethods);
                 this.methodCache.put(targetMethod, advices);
 
-                log.info("AspectJ {}", aspectClazz.getName() +"."+ targetMethod.getName());
+                log.info("AspectJ {}", this.targetClass.getName() +"."+ targetMethod.getName());
             }
         }
     }
@@ -139,10 +139,14 @@ public class AdvisedSupport {
                 .replaceAll("\\\\.\\*", ".*")
                 .replaceAll("\\(", "\\\\(")
                 .replaceAll("\\)", "\\\\)");
-        String pointCutForClassRegex = pointCut.substring(0, pointCut.lastIndexOf("\\(") - 4);
+        String pointCutForClassRegex = pointCut.substring(0, pointCut.lastIndexOf("\\(") - 2);
         // 将每个类AOP类设置上正则表达式
-        pointCutClassPattern = Pattern.compile("class " + pointCutForClassRegex
-                .substring(pointCutForClassRegex.lastIndexOf(" ") + 1));
+        String substring =  "class " + pointCutForClassRegex
+                .substring(pointCutForClassRegex.lastIndexOf(" ") + 1);
+
+        log.info("Regex : {}", substring);
+
+        pointCutClassPattern = Pattern.compile(substring);
         return pointCut;
     }
 
@@ -187,5 +191,9 @@ public class AdvisedSupport {
 
             advices.put("afterThrow", advice);
         }
+    }
+
+    public Class getTargetClass() {
+        return targetClass;
     }
 }

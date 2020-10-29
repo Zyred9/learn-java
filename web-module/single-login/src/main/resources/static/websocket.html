@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My WebSocket</title>
+</head>
+
+<body>
+<div id="form-div">
+    <form id="myform" onsubmit="return false" action="##" method="post">
+        <p>用户名：<input id="userName" name="userName" type="text" tabindex="1" size="15" value="admin1"/></p>
+        <p>密　码：<input id="password" name="password" type="password" tabindex="2" size="16" value="admin"/></p>
+        <p><input type="button" value="登录" onclick="login()">&nbsp;<input type="reset" value="重置"></p>
+    </form>
+</div>
+<br/><br/><br/>	
+<div id="message"></div>
+
+</body>
+
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var websocket = null;
+	var id = null
+	var falg = "强制下线";
+
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://localhost:8848/websocket");
+    }
+    else{
+        alert('Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function(){
+        setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function(event){
+		console.log(event.data)
+        setMessageInnerHTML("open");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function(event){
+		if (id == null) {
+			id = event.data
+		}
+		if (event.data === falg) {
+			id = null;
+			closeWebSocket();
+		}
+        setMessageInnerHTML(event.data);
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+    //发送消息
+    function send(){
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+	
+	//$(document).keydown(function(event){
+	// if(event.keyCode == 116){
+	//  closeWebSocket();
+	// }
+	//});
+	
+	function login() {
+			if (id === null){
+				return;
+			}
+			var param = {
+					"userName":$('#userName').val(),
+					"password":$('#password').val(),
+					"sessionId": id
+				}
+				
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+				contentType: 'application/json',
+                url: "http://localhost:8848/single/login" ,//url
+                data: JSON.stringify(param),
+                success: function (result) {
+					setMessageInnerHTML(result.message);
+                },
+                error : function(res) {
+                    console.log(res.resultCode)
+                }
+            });
+        }
+</script>
+</html>

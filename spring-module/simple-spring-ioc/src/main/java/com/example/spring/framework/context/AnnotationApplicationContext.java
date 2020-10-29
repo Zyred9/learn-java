@@ -9,6 +9,7 @@ import com.example.spring.framework.aop.support.AdvisedSupport;
 import com.example.spring.framework.beans.BeanWrapper;
 import com.example.spring.framework.beans.config.BeanDefinition;
 import com.example.spring.framework.support.BeanDefinitionReader;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -22,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author zyred
  * @since v 0.1
  **/
+@Slf4j
 public class AnnotationApplicationContext implements ApplicationContext {
 
     private String[] configLocations;
@@ -130,6 +132,7 @@ public class AnnotationApplicationContext implements ApplicationContext {
                  **/
                 if (support.pointCutMath()) {
                     instance = new JdkDynamicProxy(support).getProxy();
+                    log.info("AspectJ ==> {}", instance.getClass());
                 }
             }
             /***************AOP****************/
