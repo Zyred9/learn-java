@@ -13,7 +13,7 @@ import java.io.InputStream;
  * @author zyred
  * @createTime 2020/9/23 14:05
  **/
-public class    SqlSessionFactoryBuilder {
+public class  SqlSessionFactoryBuilder {
 
     /**
      * 这里用于解析，初始化整个FastBatis上下文

@@ -21,7 +21,7 @@ public class DefaultConnectionPool implements ConnectionPool {
 
     private static LinkedList<Connection> pool;
     private static DefaultConnectionPool connectionPool;
-    private static Configuration configuration;
+    private Configuration configuration;
 
     private DefaultConnectionPool() {
         throw new RuntimeException("Singleton pool can not be Constructor create instance.");

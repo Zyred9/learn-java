@@ -22,6 +22,7 @@
     </build>
     <modules>
         <module>web-module/single-login</module>
+        <module>thread-moudle</module>
     </modules>
 
     <dependencies>
