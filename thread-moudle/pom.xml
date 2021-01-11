@@ -10,6 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>thread-moudle</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.10</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.sun.jna</groupId>-->
+<!--            <artifactId>jna</artifactId>-->
+<!--            <version>3.0.9</version>-->
+<!--        </dependency>-->
+    </dependencies>
 
 
 </project>
