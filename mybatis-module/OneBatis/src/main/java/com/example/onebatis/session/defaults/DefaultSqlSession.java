@@ -5,7 +5,6 @@ import com.example.onebatis.builder.SqlBuilder;
 import com.example.onebatis.executor.Executor;
 import com.example.onebatis.session.Configuration;
 import com.example.onebatis.session.SqlSession;
-import com.example.test.mapper.UserMapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +23,11 @@ import java.util.List;
  **/
 public class DefaultSqlSession implements SqlSession {
 
-    private Configuration configuration;
-    private Executor executor;
+    /** 全局配置文件 **/
+    private final Configuration configuration;
+    /** sql执行器 **/
+    private final Executor executor;
+    /** 是否自动提交 **/
     private boolean autoCommit;
 
     public DefaultSqlSession(Configuration configuration, Executor ex, boolean autoCommit) {
@@ -35,12 +37,13 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public <T> T getMapper(Class<?> clazz) {
+    public <T> T getMapper(Class<T> clazz) {
+        // 获取到被注册的mapper
         MapperRegistry registry = this.configuration.getMapperRegistry();
         if (!registry.hasMapper(clazz)) {
             throw new RuntimeException("Mapper registry not found, case: " + clazz.getSimpleName());
         }
-        return (T) registry.getMapper(clazz, this);
+        return  registry.getMapper(clazz, this);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class DefaultSqlSession implements SqlSession {
 
     @Override
     public <T> T selectOne(SqlBuilder sqlBuilder, Object[] args, Class object) {
+        // 查询单条结果其实也是调用的多条方法
         List<T> list = this.selectList(sqlBuilder, args, object);
         if (list.size() == 1) {
             return list.get(0);
