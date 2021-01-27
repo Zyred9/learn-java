@@ -1,5 +1,6 @@
 package com.example.thread.lock;
 
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -12,9 +13,19 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class ReentrantLockTest {
 
+    static Lock lock = new ReentrantLock();
+
     public static void main(String[] args) {
-        ReentrantLock lock = new ReentrantLock();
-        lock.lock();
+        try {
+            lock.lock();
+
+            // do something
+
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
     }
 
 }
