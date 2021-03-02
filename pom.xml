@@ -23,6 +23,7 @@
     <modules>
         <module>web-module/single-login</module>
         <module>thread-moudle</module>
+        <module>rpc-module</module>
     </modules>
 
     <dependencies>

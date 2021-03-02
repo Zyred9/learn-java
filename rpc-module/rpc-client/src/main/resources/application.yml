@@ -1,0 +1,6 @@
+mall:
+  rpc:
+    host: localhost
+    port: 8888
+server:
+  port: 9999

@@ -150,10 +150,10 @@ public class EsUtil {
      * @date 2019/7/25 14:24
      */
     /*public <T> void deleteBatch(String index, Collection<T> idList) {
-        BulkRequest request = new BulkRequest();
-        idList.forEach(item -> request.add(new DeleteRequest(index, item.toString())));
+        BulkRequest com.exampl.rpc.v1.request = new BulkRequest();
+        idList.forEach(item -> com.exampl.rpc.v1.request.add(new DeleteRequest(index, item.toString())));
         try {
-            client.bulk(request, RequestOptions.DEFAULT);
+            client.bulk(com.exampl.rpc.v1.request, RequestOptions.DEFAULT);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
