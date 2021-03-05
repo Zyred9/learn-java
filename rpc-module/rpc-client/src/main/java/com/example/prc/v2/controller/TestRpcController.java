@@ -29,7 +29,6 @@ public class TestRpcController {
     public TestRpcController() {
     }
 
-
     @GetMapping("/getUserList")
     public String getUserList(){
         return this.userService.getUserList();
@@ -44,7 +43,6 @@ public class TestRpcController {
     public String allOrders(){
         return this.orderService.allOrders();
     }
-
 
 
 }

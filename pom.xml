@@ -24,6 +24,9 @@
         <module>web-module/single-login</module>
         <module>thread-moudle</module>
         <module>rpc-module</module>
+        <module>mq-module</module>
+        <module>mq-module/mq-client</module>
+        <module>mq-module/mq-server</module>
     </modules>
 
     <dependencies>
