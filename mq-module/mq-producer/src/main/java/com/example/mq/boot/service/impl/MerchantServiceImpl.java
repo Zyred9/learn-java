@@ -19,10 +19,10 @@ import java.util.List;
 public class MerchantServiceImpl implements MerchantService {
 
 
-    @Value("${com.gupaoedu.topicexchange}")
+    @Value("${com.test.topic_exchange}")
     private String topicExchange;
 
-    @Value("${com.gupaoedu.topicroutingkey1}")
+    @Value("${com.test.topic_routing_key1}")
     private String topicRoutingKey;
 
     @Autowired

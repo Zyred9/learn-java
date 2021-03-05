@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * <p>
  *      first_queue 队列监听器
+ *      51-55 56 - 520   -> 20 天  >20 上班
  * </p>
  *
  * @author zyred
@@ -19,7 +20,7 @@ import org.springframework.context.annotation.PropertySource;
 public class ThirdConsumer {
 
     @RabbitHandler
-    public void processor(String msg){
+    public void processor(String msg) {
         System.out.println("Third Queue : " + msg);
     }
 

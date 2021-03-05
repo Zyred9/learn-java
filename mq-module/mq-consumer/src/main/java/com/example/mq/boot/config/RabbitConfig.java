@@ -22,21 +22,21 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:testmq.properties")
 public class RabbitConfig {
 
-    @Value("${com.test.directExchange}")
+    @Value("${com.test.direct_exchange}")
     private String directExchange;
-    @Value("${com.test.topicExchange}")
+    @Value("${com.test.topic_exchange}")
     private String topicExchange;
-    @Value("${com.test.fanoutExchange}")
+    @Value("${com.test.fanout_exchange}")
     private String fanoutExchange;
 
 
-    @Value("${com.test.firstQueue}")
+    @Value("${com.test.first_queue}")
     private String firstQueue;
-    @Value("${com.test.secondQueue}")
+    @Value("${com.test.second_queue}")
     private String secondQueue;
-    @Value("${com.test.thirdQueue}")
+    @Value("${com.test.third_queue}")
     private String thirdQueue;
-    @Value("${com.test.fourthQueue}")
+    @Value("${com.test.fourth_queue}")
     private String fourthQueue;
 
     // *************************创建四个队列*************************** //
@@ -92,7 +92,7 @@ public class RabbitConfig {
     }
     /** FourthQueue -> FanoutExchange **/
     @Bean
-    public Binding bindSecond(@Qualifier("testFourthQueue") Queue q,
+    public Binding bindFourth(@Qualifier("testFourthQueue") Queue q,
                               @Qualifier("testFanoutExchange") FanoutExchange d){
         return BindingBuilder.bind(q).to(d);
     }

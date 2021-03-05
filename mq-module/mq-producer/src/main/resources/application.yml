@@ -3,12 +3,19 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mq?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.100.130:3306/mq?useUnicode=true&characterEncoding=utf8
     username: root
-    password: root
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
+  rabbitmq:
+    host: 182.92.175.117
+    port: 5672
+    username: admin
+    password: 123456
+    #虚拟host 可以不设置,使用server默认host
+    ## virtual-host: /
 mybatis:
   type-aliases-package: com.examole.mq.boot.entity
   mapper-locations: classpath:mybatis/mapper/*.xml
