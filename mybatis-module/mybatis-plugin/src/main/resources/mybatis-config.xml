@@ -24,14 +24,7 @@
 
     <!-- 配置插件 -->
     <plugins>
-        <plugin interceptor="com.example.mybatis.plugin.intercepter.SqlEnhanceInterceptor">
-            <property name="gupao" value="betterme" />
-        </plugin>
-        <!--<plugin interceptor="com.example.mybatis.plugin.intercepter.LevelOfTableInterceptor">
-            <property name="gupao" value="betterme" />
-        </plugin>-->
-        <!--<plugin interceptor="com.gupaoedu.interceptor.MyPageInterceptor">
-        </plugin>-->
+        <plugin interceptor="com.example.mybatis.plugin.interceptor.SqlEnhanceInterceptor"/>
     </plugins>
 
     <environments default="development">

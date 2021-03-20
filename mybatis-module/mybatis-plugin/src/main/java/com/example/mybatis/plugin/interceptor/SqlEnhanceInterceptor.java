@@ -1,4 +1,4 @@
-package com.example.mybatis.plugin.intercepter;
+package com.example.mybatis.plugin.interceptor;
 
 import com.example.mybatis.plugin.util.SqlEnhanceUtil;
 import com.example.mybatis.plugin.util.SqlLang;

@@ -1,4 +1,4 @@
-package com.example.mybatis.plugin.intercepter;
+package com.example.mybatis.plugin.interceptor;
 
 import com.example.mybatis.domain.Fee;
 import org.apache.ibatis.builder.StaticSqlSource;

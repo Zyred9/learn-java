@@ -19,8 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: qingshan
- * MyBatis Maven演示工程
+ * mybatis 原生使用 Junit 单元测试
+ *
+ * @author zyred
+ * @since v 0.1
  */
 public class MyBatisTest {
 
@@ -35,12 +37,12 @@ public class MyBatisTest {
 
     @Test
     public void customPagePlugin() {
-        PageUtil.setPage(0, 4);
+//        PageUtil.setPage(0, 4);
         SqlSession session = this.sqlSessionFactory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
         List<User> page = mapper.getUserPage("10086");
-        System.out.println(page.size());
-        page.stream().forEach(System.out::println);
+//        System.out.println(page.size());
+        page.forEach(System.out::println);
     }
 
     @Test
@@ -52,6 +54,6 @@ public class MyBatisTest {
         fee.setFeeDate(new Date());
         List<Fee> fees = mapper.selectFee(fee);
         System.out.println(fees.size());
-        fees.stream().forEach(System.out::println);
+        fees.forEach(System.out::println);
     }
 }
