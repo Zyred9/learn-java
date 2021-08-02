@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--<parent>
+        <artifactId>spring-jdbc</artifactId>
+        <groupId>org.springframework</groupId>
+        <version>5.2.9.RELEASE</version>
+    </parent>-->
+
     <groupId>org.example</groupId>
     <artifactId>learn-java</artifactId>
     <packaging>pom</packaging>
@@ -25,8 +31,8 @@
         <module>thread-moudle</module>
         <module>rpc-module</module>
         <module>mq-module</module>
-        <module>mq-module/mq-client</module>
-        <module>mq-module/mq-server</module>
+        <module>excel-moudle</module>
+        <module>netty-module</module>
     </modules>
 
     <dependencies>
@@ -57,12 +63,6 @@
             <version>5.4.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-elasticsearch -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-            <version>2.3.3.RELEASE</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>

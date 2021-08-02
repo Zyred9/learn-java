@@ -50,6 +50,7 @@ public class RpcTransport {
 
             // 拿到socket
             Socket socket = this.newSocket();
+            socket.isClosed();
             // 通过socket写服务端执行协议体
             oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(request);
